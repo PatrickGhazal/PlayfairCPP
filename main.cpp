@@ -13,12 +13,15 @@ string table;
 string preppedMessage;
 string translated;
 
-char toUpperCase(char ch) {
-    return ch - (ch >= 'a' ? 32 : 0);
+char checkY(char ch) {
+    return ch == 'Y' ? 'I' : ch;
 }
 
-bool isLetterNotY(char ch) {
-    return (ch >= 'A' && ch <= 'X') || ch == 'Z' || (ch >= 'a' && ch <= 'x') || ch == 'z';
+char toUpperCase(char ch) {
+    return checkY(ch - (ch >= 'a' ? 32 : 0));
+}
+bool isLetter(char ch) {
+    return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 }
 
 void translate(string mode) {
@@ -42,8 +45,8 @@ void prepMessage(string message, string mode) {
 
     for (unsigned i = 0; i < message.length(); i++) {
         char ch = message.at(i);
-        if (isLetterNotY(ch)) {
-            ch = toUpperCase(ch);
+        if (isLetter(ch)) {
+            ch = =toUpperCase(ch);
             if (charPairs.length() == 2) {
                 preppedMessage += charPairs;
                 charPairs = EMPTY_STR + ch;
@@ -66,11 +69,11 @@ string searchChInTable(char ch) {
 }
 
 void genTable(string keyword) { //TODO study speed of removing table letters from alphabet
-    const string alphabet = "abcdefghijklmnopqrstuvwxz"; // y merged with i to make a 5x5 table
+    const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXZ"; // Y merged with I to make a 5x5 table
     char ch;
     for (unsigned i = 0; i < keyword.length(); i++) {
         ch = keyword.at(i);
-        if (isLetterNotY(ch)) table += searchChInTable(ch);
+        if (isLetter(ch)) table += searchChInTable(toUpperCase(ch));
     }
     for (unsigned i = 0; i < alphabet.length(); i++) table += searchChInTable(alphabet.at(i));
 }
@@ -92,6 +95,7 @@ int main() {
     prepMessage(message, mode);
     translate(mode);
 
+    //cout << NEWLINE << table << NEWLINE << preppedMessage; //TODO remove this line
     cout << NEWLINE << "The " << mode << "d message is : " << translated << endl;
 
     return 0;
