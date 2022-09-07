@@ -46,7 +46,7 @@ void prepMessage(string message, string mode) {
     for (unsigned i = 0; i < message.length(); i++) {
         char ch = message.at(i);
         if (isLetter(ch)) {
-            ch = =toUpperCase(ch);
+            ch = toUpperCase(ch);
             if (charPairs.length() == 2) {
                 preppedMessage += charPairs;
                 charPairs = EMPTY_STR + ch;
