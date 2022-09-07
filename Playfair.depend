@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1662510973 source:c:\users\admin\codeblocks-workspace\playfair\main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+
